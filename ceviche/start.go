@@ -9,6 +9,7 @@ import (
 
 func Start(cfg config.Config, handler interface{}) {
 	ctx := context.Background()
+	cfg = config.Complete(cfg)
 	ctx = aws.ConfigureContext(ctx, cfg)
 	lambda.StartWithContext(ctx, handler)
 }
