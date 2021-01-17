@@ -28,8 +28,8 @@ github.com/pmezard/go-difflib v0.0.0-20151028094244-d8ed2627bdf0/go.mod h1:iKH77
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/russross/blackfriday/v2 v2.0.1/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
-github.com/rxac/ceviche v0.1.1 h1:IXQyxeQUCiXhQEcRUDZndaLMUCB3eLA2mvfk2+Aq+mo=
-github.com/rxac/ceviche v0.1.1/go.mod h1:+Xk3so7/XbEo0KaBzGGwulsZeQxyDx5Zlu6Tv3jYoRA=
+github.com/rxac/ceviche v0.2.1 h1:0s0yb+V2GBo2J3wCLcJP9XKurGlYdP/XjO+kB+P6NcY=
+github.com/rxac/ceviche v0.2.1/go.mod h1:+Xk3so7/XbEo0KaBzGGwulsZeQxyDx5Zlu6Tv3jYoRA=
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.1.4/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=

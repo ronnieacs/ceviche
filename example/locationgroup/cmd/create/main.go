@@ -58,6 +58,7 @@ func main() {
 		AggregateType:  reflect.TypeOf(aggregate.LocationGroup{}),
 		ObjectStoreUse: config.ObjectStoreUseNone,
 		EnableSnpList:  false,
+		DisableSSL:     true,
 	}
 	ceviche.Start(cfg, handler)
 }
