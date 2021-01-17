@@ -92,6 +92,7 @@ func newSession() *session.Session {
 					S3ForcePathStyle:        aws.Bool(true),
 					DisableParamValidation:  aws.Bool(true),
 					DisableComputeChecksums: aws.Bool(true),
+					DisableSSL:              aws.Bool(true),
 				},
 				SharedConfigState: session.SharedConfigEnable,
 			}))

@@ -32,9 +32,10 @@ Resources:
 
   CreateLocationGroup:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: cmd/create
-      Handler: service
+      Handler: handler
       Runtime: go1.x
       Timeout: 5
       MemorySize: 256

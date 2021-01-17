@@ -55,7 +55,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 
 func main() {
 	cfg := config.Config{
-		AggregateType:  reflect.TypeOf(&aggregate.LocationGroup{}),
+		AggregateType:  reflect.TypeOf(aggregate.LocationGroup{}),
 		ObjectStoreUse: config.ObjectStoreUseNone,
 		EnableSnpList:  false,
 	}
