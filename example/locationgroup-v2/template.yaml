@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Location Group - Back End
+
+Parameters:
+  Stage:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - stg
+      - prd
+
+Globals:
+  Api:
+    OpenApiVersion: 3.0.1
+    TracingEnabled: true
+    EndpointConfiguration: REGIONAL
+    Cors:
+      AllowHeaders: "'*'"
+      AllowMethods: "'*'"
+      AllowOrigin: "'*'"
+      MaxAge: "'31536000'"
+  Function:
+    Timeout: 5
+
+Resources:
+  RestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Stage
+
+  CreateLocationGroup:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Handler: handler
+      Runtime: go1.x
+      Timeout: 5
+      MemorySize: 256
+      Tracing: Active
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - S3CrudPolicy:
+            BucketName: location-group-object-store
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /location-group
+            Method: POST
+            RestApiId: !Ref RestApi
+      Environment:
+        Variables:
+          CEVICHE_EVENT_STORE: EventStore
+          CEVICHE_EVENT_STORE_IDX: AggregatesByType
+          CEVICHE_OBJECT_STORE: location-group-object-store
+
+Outputs:
+  LocationGroupAPI:
+    Value: !Sub "https://${RestApi}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/location-group/"
+  CreateLocationGroupFunction:
+    Value: !GetAtt CreateLocationGroup.Arn
+  CreateLocationGroupFunctionIamRole:
+    Value: !GetAtt CreateLocationGroupRole.Arn

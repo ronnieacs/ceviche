@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-xray-sdk-go/xraylog"
 	"github.com/rxac/ceviche/config"
 	cevichecontext "github.com/rxac/ceviche/context"
+	"github.com/rxac/ceviche/internal/http"
 	"github.com/rxac/ceviche/service"
 	"os"
 	"reflect"
@@ -83,7 +84,8 @@ func (ctx CevicheAWSContext) SnapshotStore() service.SnapshotStore {
 
 func newSession(cfg config.Config) *session.Session {
 	region := os.Getenv("AWS_REGION")
-
+	client := http.NewDefaultHTTPClient()
+	http.StartTLSContext(region, client)
 	sess := session.Must(
 		session.NewSessionWithOptions(
 			session.Options{
@@ -93,6 +95,7 @@ func newSession(cfg config.Config) *session.Session {
 					DisableParamValidation:  aws.Bool(true),
 					DisableComputeChecksums: aws.Bool(true),
 					DisableSSL:              aws.Bool(cfg.DisableSSL),
+					HTTPClient:              client,
 				},
 				SharedConfigState: session.SharedConfigEnable,
 			}))
