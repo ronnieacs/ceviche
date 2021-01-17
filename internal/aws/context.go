@@ -26,7 +26,7 @@ type CevicheAWSContext struct {
 
 func ConfigureContext(ctx context.Context, cfg config.Config) context.Context {
 
-	awssession := newSession()
+	awssession := newSession(cfg)
 	s3client := newS3Client(awssession)
 	dynamoclient := newDynamoDBClient(awssession)
 
@@ -81,7 +81,7 @@ func (ctx CevicheAWSContext) SnapshotStore() service.SnapshotStore {
 	return ctx.snapshotStore
 }
 
-func newSession() *session.Session {
+func newSession(cfg config.Config) *session.Session {
 	region := os.Getenv("AWS_REGION")
 
 	sess := session.Must(
@@ -92,6 +92,7 @@ func newSession() *session.Session {
 					S3ForcePathStyle:        aws.Bool(true),
 					DisableParamValidation:  aws.Bool(true),
 					DisableComputeChecksums: aws.Bool(true),
+					DisableSSL:              aws.Bool(cfg.DisableSSL),
 				},
 				SharedConfigState: session.SharedConfigEnable,
 			}))

@@ -13,6 +13,7 @@ type Config struct {
 	ObjectStoreUse ObjectStoreUse
 	ObjectHeaderR  func(interface{}) interface{}
 	EnableSnpList  bool
+	DisableSSL     bool
 }
 
 func Complete(cfg Config) Config {
